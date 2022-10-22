@@ -5,9 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Document</title>
+    <title>hello world</title>
 </head>
 <body>
+    
   <style>
     *{
     margin: 0;
@@ -72,6 +73,7 @@ button{
   </style>
     <canvas id="canvas"></canvas>
     <div class="nav">
+
         <!-- We will be accessing the data-clr in JavaScript -->
         <div class="clr" data-clr="#000"></div>
         <div class="clr" data-clr="#EF626C"></div>
@@ -80,26 +82,23 @@ button{
         <div class="clr" data-clr="#fff"></div>
         <button class="clear">clear</button>
         <button class="save" id="save">save</button>
+        
     </div>
 
     <script>
+    
     const screenshot = require('screenshot-desktop')
     const fs = require('fs');
     const path = require('path')
-    var os = require('os');
-    var homedir = os.homedir();
 
         document.getElementById("save").addEventListener("click", () => {
-        document.querySelector(".nav").style.display = "none";
 
+        document.querySelector(".nav").style.display = "none";
         setTimeout(() => {
             document.querySelector(".nav").style.display = "flex";
         }, 1000);
 
-    
         let pathh = path.join(__dirname, 'base.png');
-
-            
 
             screenshot().then((img) => {
 
@@ -111,9 +110,9 @@ button{
 
                 let data = pathh;
                 let a = document.createElement("a")
-                a.href = data
-                a.download = "sketch.png"
-                a.click()
+                    a.href = data;
+                    a.download = `${new Date().getTime()}.png`;
+                    a.click();
                 })
 
             }).catch((err) => {
@@ -122,35 +121,34 @@ button{
 
         })
 
-      const canvas = document.getElementById("canvas")
-canvas.height = window.innerHeight
-canvas.width = window.innerWidth
+        const canvas = document.getElementById("canvas")
+            canvas.height = window.innerHeight
+        canvas.width = window.innerWidth
 
-const ctx = canvas.getContext("2d")
+        const ctx = canvas.getContext("2d")
 
-let prevX = null
-let prevY = null
+        let prevX = null
+        let prevY = null
 
-ctx.lineWidth = 5
+        ctx.lineWidth = 5
 
-let draw = false
+        let draw = false
 
-let clrs = document.querySelectorAll(".clr")
-clrs = Array.from(clrs)
-clrs.forEach(clr => {
-    clr.addEventListener("click", () => {
-        ctx.strokeStyle = clr.dataset.clr
-    })
-})
+        let clrs = document.querySelectorAll(".clr")
+        clrs = Array.from(clrs)
+        clrs.forEach(clr => {
+            clr.addEventListener("click", () => {
+                ctx.strokeStyle = clr.dataset.clr
+            })
+        })
 
-let clearBtn = document.querySelector(".clear")
-clearBtn.addEventListener("click", () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-})
+        let clearBtn = document.querySelector(".clear")
+        clearBtn.addEventListener("click", () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+        })
 
-// Saving drawing as image
-window.addEventListener("mousedown", (e) => draw = true)
-window.addEventListener("mouseup", (e) => draw = false)
+        window.addEventListener("mousedown", (e) => draw = true)
+        window.addEventListener("mouseup", (e) => draw = false)
 
 window.addEventListener("mousemove", (e) => {
     if(prevX == null || prevY == null || !draw){
