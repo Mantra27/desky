@@ -10,6 +10,6 @@
 
 `npm start`
 
-https://i.imgur.com/UT90vw2.png
+[prev](https://i.imgur.com/UT90vw2.png)
 
 Feel free to contribute :)
