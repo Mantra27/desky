@@ -10,5 +10,6 @@
 
 `npm start`
 
+<img src="https://github.com/Mantra27/desky/blob/main/src/preview.png"></img>
 
 Feel free to contribute :)
