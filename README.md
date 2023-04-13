@@ -4,7 +4,9 @@
 
 ### ~/desky/desky-main/
 
-`cd src && electron index.js`
+`git clone https://github.com/Mantra27/desky.git && cd desky`
+`npm install`
+`npm start`
 
 
 Feel free to contribute :)

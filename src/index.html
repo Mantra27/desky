@@ -80,9 +80,9 @@ button{
         <div class="clr" data-clr="#fdec03"></div>
         <div class="clr" data-clr="#24d102"></div>
         <div class="clr" data-clr="#fff"></div>
-        <button class="clear">clear</button>
+        <button class="clear" id="clear">clear</button>
         <button class="save" id="save">save</button>
-        
+        <button class="undo" id="undo">undo</button>
     </div>
 
     <script>
@@ -122,10 +122,10 @@ button{
         })
 
         const canvas = document.getElementById("canvas")
-            canvas.height = window.innerHeight
+        canvas.height = window.innerHeight
         canvas.width = window.innerWidth
-
-        const ctx = canvas.getContext("2d")
+        let undoStack = [];
+        let ctx = canvas.getContext("2d")
 
         let prevX = null
         let prevY = null
@@ -138,17 +138,29 @@ button{
         clrs = Array.from(clrs)
         clrs.forEach(clr => {
             clr.addEventListener("click", () => {
+                console.log('dd')
                 ctx.strokeStyle = clr.dataset.clr
             })
         })
 
-        let clearBtn = document.querySelector(".clear")
-        clearBtn.addEventListener("click", () => {
-            ctx.clearRect(0, 0, canvas.width, canvas.height)
-        })
+        document.getElementById("clear").addEventListener("click", () => {
+            // Add the current canvas state to the undo stack before clearing
+            undoStack.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        });
 
         window.addEventListener("mousedown", (e) => draw = true)
         window.addEventListener("mouseup", (e) => draw = false)
+        window.addEventListener('keydown', (event) => {
+
+            if((event.ctrlKey || event.metaKey ) && event.key == 'z'){
+                if (undoStack.length > 0) {
+                    ctx.putImageData(undoStack.pop(), 0, 0);
+                }
+            }
+
+        });
+            
 
 window.addEventListener("mousemove", (e) => {
     if(prevX == null || prevY == null || !draw){
@@ -156,7 +168,9 @@ window.addEventListener("mousemove", (e) => {
         prevY = e.clientY
         return
     }
-
+    if (draw) {
+        undoStack.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+    }
     let currentX = e.clientX
     let currentY = e.clientY
 
