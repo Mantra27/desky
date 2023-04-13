@@ -1,6 +1,6 @@
 # Desky
 
-## Probably first ever app thats based on vanilla js and electron and does desktop doodles
+## Probably first of its kind (vanilla js and electron based) App that does desktop doodles
 
 ### ~/desky/desky-main/
 
