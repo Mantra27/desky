@@ -5,7 +5,9 @@
 ### ~/desky/desky-main/
 
 `git clone https://github.com/Mantra27/desky.git && cd desky`
+
 `npm install`
+
 `npm start`
 
 
