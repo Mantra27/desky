@@ -1,6 +1,6 @@
 # Desky
 
-## Probably first of its kind (vanilla js and electron based) App that does desktop doodles
+## electron based drawing app
 
 ### ~/desky/desky-main/
 
@@ -12,4 +12,3 @@
 
 ![prev](https://i.imgur.com/UT90vw2.png)
 
-Feel free to contribute :)
